@@ -17,7 +17,6 @@ from evaluate import evaluate
 from unet import UNet
 
 from torch.utils.tensorboard import SummaryWriter
-from utils.dataset import BasicDataset
 from torch.utils.data import DataLoader, random_split
 
 dir_img = ""#'E:/data/train/AB_tiles/imgs/'
@@ -198,7 +197,7 @@ if __name__ == '__main__':
     try:
         train_net(net=net,
                   epochs=args.epochs,
-                  batch_size=args.batch_size,
+                  batch_size=args.batchsize,
                   learning_rate=args.lr,
                   device=device,
                   img_scale=args.scale,

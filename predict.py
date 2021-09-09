@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from PIL import Image
 from torchvision import transforms
 
-from unet import UNet
+from unet.unet import UNet,crop_tensor
 from utils.data_vis import plot_img_and_mask
 from utils.dataset import BasicDataset
 

@@ -10,7 +10,7 @@ from torch import optim
 from tqdm import tqdm
 
 from eval import eval_net
-from unet.unet import UNet
+from unet.unet import UNet, crop_tensor
 
 from torch.utils.tensorboard import SummaryWriter
 from utils.dataset import BasicDataset
@@ -74,9 +74,11 @@ def train_net(net,
 
                 imgs = imgs.to(device=device, dtype=torch.float32)
                 mask_type = torch.float32 if net.n_classes == 1 else torch.long
-                true_masks = true_masks.to(device=device, dtype=mask_type)
-
+                
                 masks_pred = net(imgs)
+                
+                true_masks = crop_tensor(true_masks,masks_pred)
+                true_masks = true_masks.to(device=device, dtype=mask_type)
                 loss = criterion(masks_pred, true_masks)
                 epoch_loss += loss.item()
                 writer.add_scalar('Loss/train', loss.item(), global_step)

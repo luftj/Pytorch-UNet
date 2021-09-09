@@ -10,7 +10,7 @@ from torch import optim
 from tqdm import tqdm
 
 from eval import eval_net
-from unet import UNet
+from unet.unet import UNet
 
 from torch.utils.tensorboard import SummaryWriter
 from utils.dataset import BasicDataset
